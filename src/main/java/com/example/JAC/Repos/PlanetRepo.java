@@ -1,6 +1,6 @@
-package Repos;
+package com.example.JAC.Repos;
 
-import Entities.Planet;
+import com.example.JAC.Entities.Planet;
 import org.springframework.data.repository.CrudRepository;
 
 public interface PlanetRepo extends CrudRepository<Planet,String> {
