@@ -13,17 +13,17 @@ import org.springframework.web.reactive.function.client.WebClient;
 //@RequestMapping("https://images-api.nasa.gov/asset")
 public class PlanetController {
     final private PlanetRepo planetRepo;
-    final String nasaApi = "https://images-api.nasa.gov/asset/PIA04591";
+    final String nasaApi = "https://images-api.nasa.gov/asset/{nasa_id}";
     public PlanetController(final @Autowired PlanetRepo planetRepo) {
         this.planetRepo = planetRepo;
     }
     @Autowired
     private WebClient.Builder webClientBuilder;
     @GetMapping ("/asset/{nasa_id}")
-    public String getPlanet(@PathVariable String nasaId){
+    public String getPlanet(@PathVariable("nasa_id") String nasaId){
        return webClientBuilder.build()
                .get()
-               .uri(nasaApi)
+               .uri(nasaApi,nasaId)
                .retrieve()
                .bodyToMono(String.class)
                .block();
